@@ -1,0 +1,1824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChaturVeda - Educational Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="gradient-bg text-white py-6 shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-center mb-4">
+                <!-- ChaturVeda Logo -->
+                <svg width="80" height="80" viewBox="0 0 80 80" class="mr-4">
+                    <!-- Outer Circle - Knowledge Ring -->
+                    <circle cx="40" cy="40" r="38" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+                    
+                    <!-- Inner Sacred Geometry -->
+                    <circle cx="40" cy="40" r="32" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+                    
+                    <!-- Central Lotus Petals (Knowledge Blooming) -->
+                    <g transform="translate(40,40)">
+                        <!-- 8 Petals representing 8 directions of knowledge -->
+                        <path d="M0,-20 Q-8,-12 0,-8 Q8,-12 0,-20" fill="rgba(255,255,255,0.9)" transform="rotate(0)"/>
+                        <path d="M0,-20 Q-8,-12 0,-8 Q8,-12 0,-20" fill="rgba(255,255,255,0.8)" transform="rotate(45)"/>
+                        <path d="M0,-20 Q-8,-12 0,-8 Q8,-12 0,-20" fill="rgba(255,255,255,0.9)" transform="rotate(90)"/>
+                        <path d="M0,-20 Q-8,-12 0,-8 Q8,-12 0,-20" fill="rgba(255,255,255,0.8)" transform="rotate(135)"/>
+                        <path d="M0,-20 Q-8,-12 0,-8 Q8,-12 0,-20" fill="rgba(255,255,255,0.9)" transform="rotate(180)"/>
+                        <path d="M0,-20 Q-8,-12 0,-8 Q8,-12 0,-20" fill="rgba(255,255,255,0.8)" transform="rotate(225)"/>
+                        <path d="M0,-20 Q-8,-12 0,-8 Q8,-12 0,-20" fill="rgba(255,255,255,0.9)" transform="rotate(270)"/>
+                        <path d="M0,-20 Q-8,-12 0,-8 Q8,-12 0,-20" fill="rgba(255,255,255,0.8)" transform="rotate(315)"/>
+                    </g>
+                    
+                    <!-- Central Om Symbol (ॐ) - Stylized -->
+                    <g transform="translate(40,40)">
+                        <path d="M-8,-2 Q-12,2 -8,6 Q-4,8 0,6 Q4,4 6,0 Q8,-4 4,-6 Q0,-8 -4,-6 Q-8,-4 -8,-2" 
+                              fill="rgba(255,255,255,0.95)" stroke="rgba(255,255,255,1)" stroke-width="0.5"/>
+                        <circle cx="6" cy="-4" r="2" fill="rgba(255,255,255,0.9)"/>
+                        <path d="M-2,6 Q2,10 6,8" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.5" stroke-linecap="round"/>
+                    </g>
+                    
+                    <!-- Four Vedas Dots -->
+                    <circle cx="40" cy="12" r="2" fill="rgba(255,255,255,0.8)"/>
+                    <circle cx="68" cy="40" r="2" fill="rgba(255,255,255,0.8)"/>
+                    <circle cx="40" cy="68" r="2" fill="rgba(255,255,255,0.8)"/>
+                    <circle cx="12" cy="40" r="2" fill="rgba(255,255,255,0.8)"/>
+                </svg>
+                
+                <div class="text-center">
+                    <h1 class="text-4xl font-bold">ChaturVeda</h1>
+                    <div class="text-sm text-purple-100 font-medium tracking-wider">चतुर्वेद</div>
+                </div>
+            </div>
+            <p class="text-center text-purple-100 text-lg font-medium">
+                "चतुर्विधं ज्ञानं सर्वत्र प्रकाशते" 
+            </p>
+            <p class="text-center mt-1 text-purple-200 text-sm">
+                Four-fold Knowledge Illuminates Everywhere
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Login Screen -->
+        <div id="loginScreen" class="max-w-md mx-auto">
+            <div class="bg-white rounded-2xl shadow-xl p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Login to ChaturVeda</h2>
+                
+                <form onsubmit="handleLogin(event)" class="space-y-4">
+                    <div>
+                        <label for="loginEmail" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                        <input type="email" id="loginEmail" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="your.email@example.com">
+                    </div>
+                    
+                    <div>
+                        <label for="loginPassword" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                        <input type="password" id="loginPassword" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="••••••••">
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 rounded-lg transition duration-200">
+                        Login
+                    </button>
+                </form>
+                
+                <div class="mt-6 text-center space-y-3">
+                    <div>
+                        <p class="text-gray-600">Don't have an account?</p>
+                        <button onclick="showRegister()" class="text-purple-600 hover:text-purple-700 font-semibold">Create New Account</button>
+                    </div>
+                    
+                    <div class="border-t pt-4">
+                        <p class="text-gray-600 mb-2">Want to explore first?</p>
+                        <button onclick="loginAsGuest()" class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded-lg font-semibold transition duration-200">
+                            Continue as Guest
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Registration Screen -->
+        <div id="registerScreen" class="hidden max-w-md mx-auto">
+            <div class="bg-white rounded-2xl shadow-xl p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Register for ChaturVeda</h2>
+                
+                <form onsubmit="handleRegister(event)" class="space-y-4">
+                    <div>
+                        <label for="regFullName" class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                        <input type="text" id="regFullName" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Enter your full name">
+                    </div>
+                    
+                    <div>
+                        <label for="regEmail" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                        <input type="email" id="regEmail" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="your.email@example.com">
+                    </div>
+                    
+                    <div>
+                        <label for="regPhone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                        <input type="tel" id="regPhone" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="+91 9876543210">
+                    </div>
+                    
+                    <div>
+                        <label for="regPassword" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                        <input type="password" id="regPassword" required minlength="6" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Minimum 6 characters">
+                    </div>
+                    
+                    <div>
+                        <label for="regConfirmPassword" class="block text-sm font-medium text-gray-700 mb-2">Confirm Password</label>
+                        <input type="password" id="regConfirmPassword" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Re-enter password">
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <input type="checkbox" id="agreeTerms" required class="w-5 h-5 text-purple-600 rounded focus:ring-purple-500">
+                        <label for="agreeTerms" class="ml-3 text-sm text-gray-700">I agree to the Terms & Conditions and Privacy Policy</label>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 rounded-lg transition duration-200">
+                        Create Account
+                    </button>
+                </form>
+                
+                <div class="mt-6 text-center">
+                    <p class="text-gray-600">Already have an account?</p>
+                    <button onclick="showLogin()" class="text-purple-600 hover:text-purple-700 font-semibold">Login Here</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Role Selection Screen -->
+        <div id="roleScreen" class="hidden max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Select Your Role</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div onclick="selectRole('student')" class="bg-white rounded-2xl shadow-lg p-8 cursor-pointer card-hover text-center">
+                    <div class="text-6xl mb-4">👨‍🎓</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Student</h3>
+                    <p class="text-gray-600">Access career guidance, classes, and college insights</p>
+                </div>
+                
+                <div onclick="selectRole('professor')" class="bg-white rounded-2xl shadow-lg p-8 cursor-pointer card-hover text-center">
+                    <div class="text-6xl mb-4">👨‍🏫</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Professor</h3>
+                    <p class="text-gray-600">Teach online classes and share knowledge</p>
+                </div>
+                
+                <div onclick="selectRole('parent')" class="bg-white rounded-2xl shadow-lg p-8 cursor-pointer card-hover text-center">
+                    <div class="text-6xl mb-4">👨‍👩‍👧</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Parent</h3>
+                    <p class="text-gray-600">Monitor and support your child's education</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Student Dashboard -->
+        <div id="studentDashboard" class="hidden">
+            <button onclick="backToRoleSelection()" class="mb-6 text-purple-600 hover:text-purple-700 font-semibold">← Back to Role Selection</button>
+            <div class="flex justify-between items-center mb-8">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-800">Student Dashboard</h2>
+                    <div id="guestIndicator" class="hidden mt-2 bg-yellow-100 border border-yellow-400 text-yellow-800 px-4 py-2 rounded-lg text-sm">
+                        🔒 Guest Mode - Limited access. <button onclick="showLogin()" class="underline font-semibold">Login</button> or <button onclick="showRegister()" class="underline font-semibold">Register</button> for full features.
+                    </div>
+                </div>
+                <button onclick="logout()" class="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg">Logout</button>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div onclick="showCareerGuidance()" class="bg-white rounded-2xl shadow-lg p-6 cursor-pointer card-hover">
+                    <div class="text-4xl mb-4">🎯</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Career Guidance</h3>
+                    <p class="text-gray-600">Get personalized career advice and planning</p>
+                </div>
+                
+                <div onclick="showProfessorClasses()" class="bg-white rounded-2xl shadow-lg p-6 cursor-pointer card-hover">
+                    <div class="text-4xl mb-4">📚</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Professor Classes</h3>
+                    <p class="text-gray-600">Join live or recorded classes - ₹200</p>
+                </div>
+                
+                <div onclick="showDoubtSession()" class="bg-white rounded-2xl shadow-lg p-6 cursor-pointer card-hover">
+                    <div class="text-4xl mb-4">❓</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Doubt Sessions</h3>
+                    <p class="text-gray-600">Clear your doubts with experts</p>
+                </div>
+                
+                <div onclick="showCollegeConnect()" class="bg-white rounded-2xl shadow-lg p-6 cursor-pointer card-hover">
+                    <div class="text-4xl mb-4">🏛️</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">College Connect</h3>
+                    <p class="text-gray-600">Talk to current students - ₹300 for 100 mins</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Career Guidance Quiz -->
+        <div id="careerGuidance" class="hidden">
+            <button onclick="backToStudentDashboard()" class="mb-6 text-purple-600 hover:text-purple-700 font-semibold">← Back to Dashboard</button>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-4">🎯 Career Guidance Center</h2>
+                    <p class="text-gray-600">Discover your ideal career path through assessment or connect with expert mentors</p>
+                </div>
+                
+                <!-- Career Guidance Options -->
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div onclick="startCareerQuiz()" class="bg-white rounded-2xl shadow-lg p-8 cursor-pointer card-hover text-center border-2 border-transparent hover:border-purple-500">
+                        <div class="text-6xl mb-4">📝</div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Career Interest Quiz</h3>
+                        <p class="text-gray-600 mb-4">Take our comprehensive 15-question assessment to discover your career personality and get personalized recommendations</p>
+                        <div class="bg-green-100 text-green-800 px-4 py-2 rounded-lg font-semibold">FREE</div>
+                    </div>
+                    
+                    <div onclick="showMentorConnect()" class="bg-white rounded-2xl shadow-lg p-8 cursor-pointer card-hover text-center border-2 border-transparent hover:border-purple-500">
+                        <div class="text-6xl mb-4">👨‍💼</div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Connect with Mentors</h3>
+                        <p class="text-gray-600 mb-4">Get personalized 1-on-1 career guidance from industry experts and experienced professionals</p>
+                        <div class="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg font-semibold">₹500 for 30 mins</div>
+                    </div>
+                </div>
+                
+                <!-- Mentor Connect Interface -->
+                <div id="mentorConnectInterface" class="hidden">
+                    <div class="bg-white rounded-2xl shadow-lg p-8 mb-6">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6">Choose Your Career Mentor</h3>
+                        
+                        <!-- Mentor Categories -->
+                        <div class="grid md:grid-cols-3 gap-4 mb-6">
+                            <button onclick="filterMentors('all')" class="mentor-filter-btn bg-purple-600 text-white px-4 py-2 rounded-lg font-semibold transition duration-200">All Mentors</button>
+                            <button onclick="filterMentors('technology')" class="mentor-filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-semibold transition duration-200">Technology</button>
+                            <button onclick="filterMentors('business')" class="mentor-filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-semibold transition duration-200">Business</button>
+                            <button onclick="filterMentors('creative')" class="mentor-filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-semibold transition duration-200">Creative</button>
+                            <button onclick="filterMentors('healthcare')" class="mentor-filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-semibold transition duration-200">Healthcare</button>
+                            <button onclick="filterMentors('engineering')" class="mentor-filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-semibold transition duration-200">Engineering</button>
+                        </div>
+                        
+                        <!-- Available Mentors -->
+                        <div id="mentorsList" class="space-y-4">
+                            <!-- Technology Mentors -->
+                            <div class="mentor-card technology bg-gray-50 rounded-xl p-6 border-2 border-transparent hover:border-purple-500 transition-all duration-200">
+                                <div class="flex justify-between items-start mb-4">
+                                    <div class="flex items-center">
+                                        <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center text-white text-2xl font-bold mr-4">AR</div>
+                                        <div>
+                                            <h4 class="text-xl font-bold text-gray-800">Arjun Reddy</h4>
+                                            <p class="text-gray-600">Senior Software Engineer at Google</p>
+                                            <p class="text-sm text-gray-500">⭐ 4.9 (127 sessions) • 8 years experience</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mb-2">Available Now</div>
+                                        <p class="text-lg font-bold text-purple-600">₹500/30min</p>
+                                    </div>
+                                </div>
+                                <p class="text-gray-700 mb-4">Specializes in: Software Development, Career Transitions, Tech Interview Prep, System Design</p>
+                                <button onclick="bookMentor('Arjun Reddy', 'Senior Software Engineer at Google')" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 rounded-lg transition duration-200">Book Session</button>
+                            </div>
+                            
+                            <!-- Business Mentors -->
+                            <div class="mentor-card business bg-gray-50 rounded-xl p-6 border-2 border-transparent hover:border-purple-500 transition-all duration-200">
+                                <div class="flex justify-between items-start mb-4">
+                                    <div class="flex items-center">
+                                        <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center text-white text-2xl font-bold mr-4">PS</div>
+                                        <div>
+                                            <h4 class="text-xl font-bold text-gray-800">Priya Sharma</h4>
+                                            <p class="text-gray-600">Marketing Director at Unilever</p>
+                                            <p class="text-sm text-gray-500">⭐ 4.8 (89 sessions) • 12 years experience</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold mb-2">Busy until 6 PM</div>
+                                        <p class="text-lg font-bold text-purple-600">₹500/30min</p>
+                                    </div>
+                                </div>
+                                <p class="text-gray-700 mb-4">Specializes in: Marketing Strategy, Brand Management, MBA Guidance, Leadership Development</p>
+                                <button onclick="bookMentor('Priya Sharma', 'Marketing Director at Unilever')" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 rounded-lg transition duration-200">Book Session</button>
+                            </div>
+                            
+                            <!-- Creative Mentors -->
+                            <div class="mentor-card creative bg-gray-50 rounded-xl p-6 border-2 border-transparent hover:border-purple-500 transition-all duration-200">
+                                <div class="flex justify-between items-start mb-4">
+                                    <div class="flex items-center">
+                                        <div class="w-16 h-16 bg-pink-500 rounded-full flex items-center justify-center text-white text-2xl font-bold mr-4">RK</div>
+                                        <div>
+                                            <h4 class="text-xl font-bold text-gray-800">Rahul Kapoor</h4>
+                                            <p class="text-gray-600">Creative Director at Ogilvy</p>
+                                            <p class="text-sm text-gray-500">⭐ 4.7 (64 sessions) • 10 years experience</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mb-2">Available Now</div>
+                                        <p class="text-lg font-bold text-purple-600">₹500/30min</p>
+                                    </div>
+                                </div>
+                                <p class="text-gray-700 mb-4">Specializes in: Graphic Design, Advertising, Portfolio Building, Creative Career Paths</p>
+                                <button onclick="bookMentor('Rahul Kapoor', 'Creative Director at Ogilvy')" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 rounded-lg transition duration-200">Book Session</button>
+                            </div>
+                            
+                            <!-- Healthcare Mentors -->
+                            <div class="mentor-card healthcare bg-gray-50 rounded-xl p-6 border-2 border-transparent hover:border-purple-500 transition-all duration-200">
+                                <div class="flex justify-between items-start mb-4">
+                                    <div class="flex items-center">
+                                        <div class="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center text-white text-2xl font-bold mr-4">AM</div>
+                                        <div>
+                                            <h4 class="text-xl font-bold text-gray-800">Dr. Anita Mehta</h4>
+                                            <p class="text-gray-600">Cardiologist at AIIMS</p>
+                                            <p class="text-sm text-gray-500">⭐ 4.9 (156 sessions) • 15 years experience</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mb-2">Available Now</div>
+                                        <p class="text-lg font-bold text-purple-600">₹500/30min</p>
+                                    </div>
+                                </div>
+                                <p class="text-gray-700 mb-4">Specializes in: Medical Career Guidance, NEET Preparation, Residency Planning, Healthcare Leadership</p>
+                                <button onclick="bookMentor('Dr. Anita Mehta', 'Cardiologist at AIIMS')" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 rounded-lg transition duration-200">Book Session</button>
+                            </div>
+                            
+                            <!-- Engineering Mentors -->
+                            <div class="mentor-card engineering bg-gray-50 rounded-xl p-6 border-2 border-transparent hover:border-purple-500 transition-all duration-200">
+                                <div class="flex justify-between items-start mb-4">
+                                    <div class="flex items-center">
+                                        <div class="w-16 h-16 bg-indigo-500 rounded-full flex items-center justify-center text-white text-2xl font-bold mr-4">VG</div>
+                                        <div>
+                                            <h4 class="text-xl font-bold text-gray-800">Vikram Gupta</h4>
+                                            <p class="text-gray-600">Principal Engineer at Tesla</p>
+                                            <p class="text-sm text-gray-500">⭐ 4.8 (98 sessions) • 14 years experience</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold mb-2">Next: Tomorrow 2 PM</div>
+                                        <p class="text-lg font-bold text-purple-600">₹500/30min</p>
+                                    </div>
+                                </div>
+                                <p class="text-gray-700 mb-4">Specializes in: Mechanical Engineering, Automotive Industry, Product Development, Engineering Management</p>
+                                <button onclick="bookMentor('Vikram Gupta', 'Principal Engineer at Tesla')" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 rounded-lg transition duration-200">Book Session</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quiz Progress -->
+                <div id="quizProgressSection" class="hidden bg-white rounded-2xl shadow-lg p-6 mb-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Question <span id="currentQuestion">1</span> of <span id="totalQuestions">15</span></h3>
+                        <div class="text-sm text-purple-600 font-medium"><span id="progressPercent">7</span>% Complete</div>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div id="progressBar" class="bg-purple-600 h-2 rounded-full transition-all duration-300" style="width: 7%"></div>
+                    </div>
+                </div>
+                
+                <!-- Quiz Question -->
+                <div id="quizContainer" class="bg-white rounded-2xl shadow-lg p-8">
+                    <div class="text-center mb-8">
+                        <div id="questionIcon" class="text-6xl mb-4">🤔</div>
+                        <h3 id="questionText" class="text-2xl font-bold text-gray-800 mb-4">What type of activities do you enjoy most in your free time?</h3>
+                    </div>
+                    
+                    <div id="optionsContainer" class="space-y-4 mb-8">
+                        <!-- Options will be populated dynamically -->
+                    </div>
+                    
+                    <!-- Navigation Controls -->
+                    <div class="flex justify-between items-center">
+                        <button id="prevButton" onclick="previousQuestion()" class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-semibold transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                            ← Previous
+                        </button>
+                        
+                        <div class="text-center">
+                            <p class="text-sm text-gray-600 mb-2">Select one or more options that apply to you</p>
+                            <button id="nextButton" onclick="nextQuestion()" class="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-lg font-semibold transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                                Next →
+                            </button>
+                        </div>
+                        
+                        <button onclick="skipQuestion()" class="text-gray-500 hover:text-gray-700 px-4 py-3 font-medium transition duration-200">
+                            Skip
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Quiz Results -->
+                <div id="quizResults" class="hidden">
+                    <div class="bg-white rounded-2xl shadow-lg p-8">
+                        <div class="text-center mb-8">
+                            <div id="resultIcon" class="text-6xl mb-4">🎓</div>
+                            <h3 class="text-3xl font-bold text-gray-800 mb-4">Your Career Profile</h3>
+                            <div id="careerType" class="text-2xl font-bold text-purple-600 mb-2">Analytical Thinker</div>
+                            <p id="careerDescription" class="text-gray-600 max-w-2xl mx-auto">You have a natural inclination towards research, problem-solving, and analytical thinking. You enjoy working with data, discovering patterns, and finding logical solutions.</p>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 gap-6 mb-8">
+                            <div class="bg-blue-50 rounded-xl p-6">
+                                <h4 class="text-xl font-bold text-blue-800 mb-4">🎯 Recommended Career Paths</h4>
+                                <ul id="careerPaths" class="space-y-2 text-blue-700">
+                                    <li>• Data Scientist</li>
+                                    <li>• Research Analyst</li>
+                                    <li>• Software Engineer</li>
+                                    <li>• Financial Analyst</li>
+                                    <li>• Biomedical Researcher</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-green-50 rounded-xl p-6">
+                                <h4 class="text-xl font-bold text-green-800 mb-4">📚 Suggested Study Fields</h4>
+                                <ul id="studyFields" class="space-y-2 text-green-700">
+                                    <li>• Computer Science</li>
+                                    <li>• Mathematics</li>
+                                    <li>• Statistics</li>
+                                    <li>• Economics</li>
+                                    <li>• Biotechnology</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-purple-50 rounded-xl p-6 mb-6">
+                            <h4 class="text-xl font-bold text-purple-800 mb-4">💡 Next Steps</h4>
+                            <div class="grid md:grid-cols-3 gap-4">
+                                <div class="text-center">
+                                    <div class="text-3xl mb-2">📖</div>
+                                    <p class="text-purple-700 font-semibold">Explore Related Courses</p>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-3xl mb-2">🏛️</div>
+                                    <p class="text-purple-700 font-semibold">Connect with College Students</p>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-3xl mb-2">👨‍🏫</div>
+                                    <p class="text-purple-700 font-semibold">Join Relevant Classes</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-4">
+                            <button onclick="retakeQuiz()" class="flex-1 bg-gray-500 hover:bg-gray-600 text-white font-semibold py-3 rounded-lg transition duration-200">
+                                Retake Quiz
+                            </button>
+                            <button onclick="exploreClasses()" class="flex-1 bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 rounded-lg transition duration-200">
+                                Explore Recommended Classes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Professor Dashboard -->
+        <div id="professorDashboard" class="hidden">
+            <button onclick="backToRoleSelection()" class="mb-6 text-purple-600 hover:text-purple-700 font-semibold">← Back to Role Selection</button>
+            <div class="flex justify-between items-center mb-8">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-800">Professor Dashboard</h2>
+                    <div id="guestIndicatorProf" class="hidden mt-2 bg-yellow-100 border border-yellow-400 text-yellow-800 px-4 py-2 rounded-lg text-sm">
+                        🔒 Guest Mode - Limited access. <button onclick="showLogin()" class="underline font-semibold">Login</button> or <button onclick="showRegister()" class="underline font-semibold">Register</button> to create classes.
+                    </div>
+                </div>
+                <button onclick="logout()" class="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg">Logout</button>
+            </div>
+            
+            <div class="bg-white rounded-2xl shadow-lg p-8 mb-6">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">Register Your Classes</h3>
+                
+                <div class="space-y-4">
+                    <div>
+                        <label for="className" class="block text-sm font-medium text-gray-700 mb-2">Class Name</label>
+                        <input type="text" id="className" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="e.g., Advanced Mathematics">
+                    </div>
+                    
+                    <div>
+                        <label for="classDescription" class="block text-sm font-medium text-gray-700 mb-2">Description</label>
+                        <textarea id="classDescription" rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Describe your class..."></textarea>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Class Type</label>
+                            <select id="classType" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                                <option value="live">Live Classes</option>
+                                <option value="recorded">Recorded Videos</option>
+                            </select>
+                        </div>
+                        
+                        <div id="timingSlot">
+                            <label for="timing" class="block text-sm font-medium text-gray-700 mb-2">Timing Slot</label>
+                            <input type="time" id="timing" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                        </div>
+                    </div>
+                    
+                    <div id="videoUpload" class="hidden">
+                        <label for="videoFile" class="block text-sm font-medium text-gray-700 mb-2">Upload Video</label>
+                        <input type="file" id="videoFile" accept="video/*" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    </div>
+                    
+                    <button onclick="registerClass()" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 rounded-lg transition duration-200">
+                        Register Class
+                    </button>
+                </div>
+            </div>
+            
+            <div class="bg-green-50 border-l-4 border-green-500 p-6 rounded-lg mb-6">
+                <h4 class="font-bold text-green-800 mb-2">💰 Earnings Information</h4>
+                <p class="text-green-700">You earn ₹100 for each student who enrolls in your class</p>
+            </div>
+            
+            <!-- Class History Section -->
+            <div class="bg-white rounded-2xl shadow-lg p-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">Your Class History</h3>
+                
+                <div id="classHistory" class="space-y-4">
+                    <!-- Sample class history - will be populated dynamically -->
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h4 class="font-bold text-gray-800">Advanced Mathematics</h4>
+                                <p class="text-gray-600 text-sm">Live Class • Created on Jan 15, 2024</p>
+                            </div>
+                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">Active</span>
+                        </div>
+                        <p class="text-gray-600 mb-3">Master calculus and algebra concepts with practical examples</p>
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-purple-600 font-semibold">👥 12 Students Enrolled</span>
+                            <span class="text-green-600 font-semibold">💰 Earned: ₹1,200</span>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h4 class="font-bold text-gray-800">Physics Fundamentals</h4>
+                                <p class="text-gray-600 text-sm">Recorded Video • Created on Jan 10, 2024</p>
+                            </div>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold">Active</span>
+                        </div>
+                        <p class="text-gray-600 mb-3">Complete physics course covering mechanics and thermodynamics</p>
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-purple-600 font-semibold">👥 8 Students Enrolled</span>
+                            <span class="text-green-600 font-semibold">💰 Earned: ₹800</span>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded-lg p-4 opacity-75">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h4 class="font-bold text-gray-800">Chemistry Basics</h4>
+                                <p class="text-gray-600 text-sm">Live Class • Created on Dec 20, 2023</p>
+                            </div>
+                            <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm font-semibold">Completed</span>
+                        </div>
+                        <p class="text-gray-600 mb-3">Introduction to organic and inorganic chemistry</p>
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-purple-600 font-semibold">👥 15 Students Enrolled</span>
+                            <span class="text-green-600 font-semibold">💰 Earned: ₹1,500</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-6 p-4 bg-purple-50 rounded-lg">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h4 class="font-bold text-purple-800">Total Earnings</h4>
+                            <p class="text-purple-600">From all your classes</p>
+                        </div>
+                        <span class="text-3xl font-bold text-purple-600">₹3,500</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Parent Dashboard -->
+        <div id="parentDashboard" class="hidden">
+            <button onclick="backToRoleSelection()" class="mb-6 text-purple-600 hover:text-purple-700 font-semibold">← Back to Role Selection</button>
+            <div class="flex justify-between items-center mb-8">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-800">Parent Dashboard</h2>
+                    <div id="guestIndicatorParent" class="hidden mt-2 bg-yellow-100 border border-yellow-400 text-yellow-800 px-4 py-2 rounded-lg text-sm">
+                        🔒 Guest Mode - Limited access. <button onclick="showLogin()" class="underline font-semibold">Login</button> or <button onclick="showRegister()" class="underline font-semibold">Register</button> for full monitoring features.
+                    </div>
+                </div>
+                <button onclick="logout()" class="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg">Logout</button>
+            </div>
+            
+            <div class="bg-white rounded-2xl shadow-lg p-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">Monitor Your Child's Progress</h3>
+                <p class="text-gray-600 mb-6">Track classes, performance, and activities</p>
+                
+                <div class="space-y-4">
+                    <div class="border-l-4 border-blue-500 pl-4 py-2">
+                        <h4 class="font-semibold text-gray-800">Classes Enrolled: 3</h4>
+                        <p class="text-gray-600 text-sm">Mathematics, Physics, Chemistry</p>
+                    </div>
+                    
+                    <div class="border-l-4 border-green-500 pl-4 py-2">
+                        <h4 class="font-semibold text-gray-800">Attendance: 95%</h4>
+                        <p class="text-gray-600 text-sm">Excellent attendance record</p>
+                    </div>
+                    
+                    <div class="border-l-4 border-purple-500 pl-4 py-2">
+                        <h4 class="font-semibold text-gray-800">Doubt Sessions: 5 this month</h4>
+                        <p class="text-gray-600 text-sm">Active learner</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Professor Classes List -->
+        <div id="professorClassesList" class="hidden">
+            <button onclick="backToStudentDashboard()" class="mb-6 text-purple-600 hover:text-purple-700 font-semibold">← Back to Dashboard</button>
+            
+            <h2 class="text-3xl font-bold text-gray-800 mb-8">Available Professor Classes</h2>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800">Advanced Mathematics</h3>
+                            <p class="text-gray-600">Prof. Sharma</p>
+                        </div>
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">Live</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">Master calculus and algebra concepts</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold text-purple-600">₹200</span>
+                        <button onclick="enrollClass('Advanced Mathematics')" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg">Enroll Now</button>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800">Physics Fundamentals</h3>
+                            <p class="text-gray-600">Prof. Patel</p>
+                        </div>
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold">Recorded</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">Complete physics course with experiments</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold text-purple-600">₹200</span>
+                        <button onclick="enrollClass('Physics Fundamentals')" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg">Enroll Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- College Connect -->
+        <div id="collegeConnect" class="hidden">
+            <button onclick="backToStudentDashboard()" class="mb-6 text-purple-600 hover:text-purple-700 font-semibold">← Back to Dashboard</button>
+            
+            <h2 class="text-3xl font-bold text-gray-800 mb-8">Connect with College Students</h2>
+            
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg mb-6">
+                <h4 class="font-bold text-blue-800 mb-2">💡 How it works</h4>
+                <p class="text-blue-700">Pay ₹300 to get 100 minutes of conversation with current students from your target college</p>
+            </div>
+            
+            <div class="bg-white rounded-2xl shadow-lg p-8 mb-6">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">Search Target College</h3>
+                
+                <div class="space-y-4">
+                    <div>
+                        <label for="collegeName" class="block text-sm font-medium text-gray-700 mb-2">College Name</label>
+                        <input type="text" id="collegeName" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="e.g., IIT Delhi">
+                    </div>
+                    
+                    <button onclick="searchCollege()" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 rounded-lg transition duration-200">
+                        Search & Pay ₹300
+                    </button>
+                </div>
+            </div>
+            
+            <div id="collegeStudentsList" class="hidden">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">Available Students</h3>
+                
+                <div class="space-y-4">
+                    <div class="bg-white rounded-xl shadow-lg p-6 flex justify-between items-center">
+                        <div>
+                            <h4 class="font-bold text-gray-800">Rahul Kumar</h4>
+                            <p class="text-gray-600">Computer Science, 3rd Year</p>
+                            <p class="text-sm text-gray-500">⭐ 4.8 rating (24 calls)</p>
+                        </div>
+                        <button onclick="startCall('Rahul Kumar')" class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg">Start Call</button>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-lg p-6 flex justify-between items-center">
+                        <div>
+                            <h4 class="font-bold text-gray-800">Priya Sharma</h4>
+                            <p class="text-gray-600">Mechanical Engineering, 2nd Year</p>
+                            <p class="text-sm text-gray-500">⭐ 4.9 rating (31 calls)</p>
+                        </div>
+                        <button onclick="startCall('Priya Sharma')" class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg">Start Call</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call Interface -->
+        <div id="callInterface" class="hidden">
+            <button onclick="backToCollegeConnect()" class="mb-6 text-purple-600 hover:text-purple-700 font-semibold">← Back to College Connect</button>
+            <div class="max-w-2xl mx-auto">
+                <div class="bg-white rounded-2xl shadow-2xl p-8">
+                    <div class="text-center mb-8">
+                        <div class="text-6xl mb-4">📞</div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">In Call with <span id="calleeName"></span></h3>
+                        <p class="text-gray-600">Time Remaining: <span id="timeRemaining" class="font-bold text-purple-600">100:00</span> minutes</p>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-xl p-6 mb-6">
+                        <h4 class="font-semibold text-gray-800 mb-3">Call Notes</h4>
+                        <textarea id="callNotes" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Take notes during your call..."></textarea>
+                    </div>
+                    
+                    <button onclick="endCall()" class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-3 rounded-lg transition duration-200">
+                        End Call
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mentor Session Interface -->
+        <div id="mentorSessionInterface" class="hidden">
+            <button onclick="backToCareerGuidance()" class="mb-6 text-purple-600 hover:text-purple-700 font-semibold">← Back to Career Guidance</button>
+            <div class="max-w-2xl mx-auto">
+                <div class="bg-white rounded-2xl shadow-2xl p-8">
+                    <div class="text-center mb-8">
+                        <div class="text-6xl mb-4">👨‍💼</div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Mentoring Session with <span id="mentorSessionName"></span></h3>
+                        <p class="text-gray-600"><span id="mentorSessionTitle"></span></p>
+                        <p class="text-purple-600 font-semibold mt-2">Time Remaining: <span id="mentorTimeRemaining" class="font-bold">30:00</span> minutes</p>
+                    </div>
+                    
+                    <div class="bg-blue-50 rounded-xl p-6 mb-6">
+                        <h4 class="font-semibold text-blue-800 mb-3">💡 Session Tips</h4>
+                        <ul class="text-blue-700 text-sm space-y-1">
+                            <li>• Come prepared with specific questions about your career goals</li>
+                            <li>• Ask about industry trends and required skills</li>
+                            <li>• Discuss your educational path and next steps</li>
+                            <li>• Take notes during the conversation</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-xl p-6 mb-6">
+                        <h4 class="font-semibold text-gray-800 mb-3">Session Notes</h4>
+                        <textarea id="mentorSessionNotes" rows="6" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Take notes during your mentoring session..."></textarea>
+                    </div>
+                    
+                    <div class="flex gap-4">
+                        <button onclick="extendSession()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition duration-200">
+                            Extend +15 min (₹250)
+                        </button>
+                        <button onclick="endMentorSession()" class="flex-1 bg-red-500 hover:bg-red-600 text-white font-semibold py-3 rounded-lg transition duration-200">
+                            End Session
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rating Interface -->
+        <div id="ratingInterface" class="hidden">
+            <button onclick="backToStudentDashboard()" class="mb-6 text-purple-600 hover:text-purple-700 font-semibold">← Back to Dashboard</button>
+            <div class="max-w-md mx-auto">
+                <div class="bg-white rounded-2xl shadow-2xl p-8">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Rate Your Experience</h3>
+                    
+                    <div class="text-center mb-6">
+                        <div class="text-5xl mb-4">⭐</div>
+                        <div class="flex justify-center gap-2 mb-4">
+                            <button onclick="setRating(1)" class="text-4xl hover:scale-110 transition-transform">⭐</button>
+                            <button onclick="setRating(2)" class="text-4xl hover:scale-110 transition-transform">⭐</button>
+                            <button onclick="setRating(3)" class="text-4xl hover:scale-110 transition-transform">⭐</button>
+                            <button onclick="setRating(4)" class="text-4xl hover:scale-110 transition-transform">⭐</button>
+                            <button onclick="setRating(5)" class="text-4xl hover:scale-110 transition-transform">⭐</button>
+                        </div>
+                        <p id="ratingValue" class="text-gray-600 font-semibold">Select rating</p>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label for="feedback" class="block text-sm font-medium text-gray-700 mb-2">Feedback (Optional)</label>
+                        <textarea id="feedback" rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Share your experience..."></textarea>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="flex items-center">
+                            <input type="checkbox" id="reportAbuse" class="w-5 h-5 text-purple-600 rounded focus:ring-purple-500">
+                            <span class="ml-3 text-gray-700">Report abusive language or inappropriate behavior</span>
+                        </label>
+                    </div>
+                    
+                    <button onclick="submitRating()" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 rounded-lg transition duration-200">
+                        Submit Rating
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let currentUser = null;
+        let currentRole = null;
+        let selectedRating = 0;
+        let callTimer = null;
+        let mentorTimer = null;
+        let timeLeft = 6000; // 100 minutes in seconds
+        let mentorTimeLeft = 1800; // 30 minutes in seconds
+        let registeredUsers = []; // Store registered users
+        let currentMentorSession = null;
+
+        // Career Quiz Variables
+        let currentQuestionIndex = 0;
+        let quizAnswers = [];
+        let careerScores = {
+            analytical: 0,
+            creative: 0,
+            leadership: 0,
+            technical: 0,
+            social: 0,
+            business: 0
+        };
+
+        const quizQuestions = [
+            {
+                icon: "🤔",
+                question: "What type of activities do you enjoy most in your free time?",
+                options: [
+                    { text: "Reading books, researching topics, solving puzzles", scores: { analytical: 3, technical: 1 } },
+                    { text: "Drawing, painting, writing stories, playing music", scores: { creative: 3, social: 1 } },
+                    { text: "Playing sports, organizing events, leading group activities", scores: { leadership: 3, social: 2 } },
+                    { text: "Building things, fixing gadgets, working with tools", scores: { technical: 3, analytical: 1 } }
+                ]
+            },
+            {
+                icon: "📚",
+                question: "Which school subjects do you find most interesting?",
+                options: [
+                    { text: "Mathematics, Physics, Chemistry", scores: { analytical: 3, technical: 2 } },
+                    { text: "Art, Literature, Music, Drama", scores: { creative: 3, social: 1 } },
+                    { text: "History, Geography, Political Science", scores: { social: 2, leadership: 2, business: 1 } },
+                    { text: "Computer Science, Engineering, Technology", scores: { technical: 3, analytical: 2 } }
+                ]
+            },
+            {
+                icon: "💼",
+                question: "In a group project, what role do you naturally take?",
+                options: [
+                    { text: "The researcher who gathers and analyzes information", scores: { analytical: 3, technical: 1 } },
+                    { text: "The creative designer who makes it visually appealing", scores: { creative: 3, social: 1 } },
+                    { text: "The leader who coordinates and motivates the team", scores: { leadership: 3, business: 2 } },
+                    { text: "The problem-solver who handles technical challenges", scores: { technical: 3, analytical: 2 } }
+                ]
+            },
+            {
+                icon: "🎯",
+                question: "What motivates you most in your work or studies?",
+                options: [
+                    { text: "Discovering new knowledge and understanding complex concepts", scores: { analytical: 3, technical: 1 } },
+                    { text: "Creating something beautiful or expressing ideas creatively", scores: { creative: 3, social: 1 } },
+                    { text: "Making a positive impact on people's lives", scores: { social: 3, leadership: 2 } },
+                    { text: "Building successful ventures and achieving financial goals", scores: { business: 3, leadership: 2 } }
+                ]
+            },
+            {
+                icon: "🌟",
+                question: "Which work environment appeals to you most?",
+                options: [
+                    { text: "Quiet laboratory or research facility", scores: { analytical: 3, technical: 2 } },
+                    { text: "Creative studio or artistic workspace", scores: { creative: 3, social: 1 } },
+                    { text: "Dynamic office with lots of team interaction", scores: { leadership: 2, business: 2, social: 2 } },
+                    { text: "High-tech workspace with cutting-edge equipment", scores: { technical: 3, analytical: 1 } }
+                ]
+            },
+            {
+                icon: "🔍",
+                question: "How do you prefer to solve problems?",
+                options: [
+                    { text: "Through systematic analysis and logical reasoning", scores: { analytical: 3, technical: 2 } },
+                    { text: "Through creative brainstorming and innovative thinking", scores: { creative: 3, leadership: 1 } },
+                    { text: "Through collaboration and seeking diverse perspectives", scores: { social: 3, leadership: 2 } },
+                    { text: "Through hands-on experimentation and testing", scores: { technical: 3, analytical: 1 } }
+                ]
+            },
+            {
+                icon: "📈",
+                question: "What type of success do you value most?",
+                options: [
+                    { text: "Making groundbreaking discoveries or innovations", scores: { analytical: 3, technical: 2 } },
+                    { text: "Creating work that inspires and moves people", scores: { creative: 3, social: 2 } },
+                    { text: "Leading teams to achieve ambitious goals", scores: { leadership: 3, business: 2 } },
+                    { text: "Building profitable and sustainable businesses", scores: { business: 3, leadership: 1 } }
+                ]
+            },
+            {
+                icon: "🎨",
+                question: "Which activity would you choose for a weekend workshop?",
+                options: [
+                    { text: "Data analysis and statistical modeling workshop", scores: { analytical: 3, technical: 1 } },
+                    { text: "Creative writing or digital art masterclass", scores: { creative: 3, social: 1 } },
+                    { text: "Leadership and public speaking seminar", scores: { leadership: 3, business: 2 } },
+                    { text: "Coding bootcamp or robotics workshop", scores: { technical: 3, analytical: 2 } }
+                ]
+            },
+            {
+                icon: "🌍",
+                question: "What global issue would you most like to contribute to solving?",
+                options: [
+                    { text: "Climate change through scientific research", scores: { analytical: 3, technical: 2 } },
+                    { text: "Cultural preservation through arts and media", scores: { creative: 3, social: 2 } },
+                    { text: "Poverty reduction through social programs", scores: { social: 3, leadership: 2 } },
+                    { text: "Economic development through innovation", scores: { business: 3, technical: 1 } }
+                ]
+            },
+            {
+                icon: "💡",
+                question: "Which statement best describes your ideal career?",
+                options: [
+                    { text: "Conducting research that advances human knowledge", scores: { analytical: 3, technical: 1 } },
+                    { text: "Creating content that entertains and inspires", scores: { creative: 3, social: 2 } },
+                    { text: "Managing teams and driving organizational success", scores: { leadership: 3, business: 2 } },
+                    { text: "Developing technology that improves lives", scores: { technical: 3, analytical: 2 } }
+                ]
+            },
+            {
+                icon: "🏆",
+                question: "What would make you feel most accomplished?",
+                options: [
+                    { text: "Publishing research in a prestigious journal", scores: { analytical: 3, technical: 1 } },
+                    { text: "Having your creative work displayed in galleries", scores: { creative: 3, social: 1 } },
+                    { text: "Being recognized as an influential leader", scores: { leadership: 3, business: 2 } },
+                    { text: "Launching a successful startup company", scores: { business: 3, technical: 1 } }
+                ]
+            },
+            {
+                icon: "🎓",
+                question: "Which learning style suits you best?",
+                options: [
+                    { text: "Independent study with deep focus on theory", scores: { analytical: 3, technical: 1 } },
+                    { text: "Hands-on creative projects and artistic expression", scores: { creative: 3, social: 1 } },
+                    { text: "Group discussions and collaborative learning", scores: { social: 3, leadership: 2 } },
+                    { text: "Practical application and real-world problem solving", scores: { technical: 3, business: 2 } }
+                ]
+            },
+            {
+                icon: "⚡",
+                question: "What energizes you most?",
+                options: [
+                    { text: "Solving complex puzzles and understanding systems", scores: { analytical: 3, technical: 2 } },
+                    { text: "Expressing ideas through various creative mediums", scores: { creative: 3, social: 1 } },
+                    { text: "Inspiring and motivating others to achieve goals", scores: { leadership: 3, social: 2 } },
+                    { text: "Building and optimizing efficient processes", scores: { technical: 3, business: 2 } }
+                ]
+            },
+            {
+                icon: "🔬",
+                question: "Which work style describes you best?",
+                options: [
+                    { text: "Methodical and detail-oriented researcher", scores: { analytical: 3, technical: 2 } },
+                    { text: "Intuitive and imaginative creator", scores: { creative: 3, social: 1 } },
+                    { text: "Charismatic and influential communicator", scores: { leadership: 3, social: 2 } },
+                    { text: "Strategic and results-driven entrepreneur", scores: { business: 3, leadership: 2 } }
+                ]
+            },
+            {
+                icon: "🚀",
+                question: "What type of impact do you want to make?",
+                options: [
+                    { text: "Advance scientific understanding of the world", scores: { analytical: 3, technical: 2 } },
+                    { text: "Enrich people's lives through beautiful creations", scores: { creative: 3, social: 2 } },
+                    { text: "Guide organizations and communities to success", scores: { leadership: 3, business: 1 } },
+                    { text: "Improve society through technological innovation", scores: { technical: 3, business: 2 } }
+                ]
+            }
+        ];
+
+        const careerProfiles = {
+            analytical: {
+                type: "Analytical Thinker",
+                icon: "🔬",
+                description: "You have a natural inclination towards research, problem-solving, and analytical thinking. You enjoy working with data, discovering patterns, and finding logical solutions to complex problems.",
+                careers: ["Data Scientist", "Research Analyst", "Statistician", "Market Researcher", "Financial Analyst", "Biomedical Researcher", "Operations Research Analyst", "Actuary", "Quantitative Analyst", "Business Intelligence Analyst"],
+                fields: ["Mathematics", "Statistics", "Economics", "Psychology", "Biotechnology", "Environmental Science", "Data Science", "Applied Mathematics", "Econometrics", "Computational Biology"]
+            },
+            creative: {
+                type: "Creative Innovator",
+                icon: "🎨",
+                description: "You thrive on creativity, artistic expression, and innovative thinking. You have a strong aesthetic sense and enjoy bringing new ideas to life through various creative mediums.",
+                careers: ["Graphic Designer", "Content Creator", "Film Director", "Architect", "Fashion Designer", "Creative Writer", "UX/UI Designer", "Art Director", "Game Designer", "Creative Strategist"],
+                fields: ["Fine Arts", "Design", "Media Studies", "Architecture", "Literature", "Film Studies", "Digital Arts", "Creative Writing", "Visual Communication", "Industrial Design"]
+            },
+            leadership: {
+                type: "Natural Leader",
+                icon: "👑",
+                description: "You excel at inspiring others, managing teams, and driving organizational success. You have strong communication skills and enjoy taking charge of projects and initiatives.",
+                careers: ["Project Manager", "CEO/Executive", "Human Resources Manager", "Political Leader", "Non-profit Director", "Team Lead", "Operations Manager", "Change Management Consultant", "Executive Coach", "Department Head"],
+                fields: ["Business Administration", "Management", "Political Science", "Public Administration", "Organizational Psychology", "International Relations", "Leadership Studies", "Public Policy", "Strategic Management", "Human Resources"]
+            },
+            technical: {
+                type: "Technical Problem Solver",
+                icon: "⚙️",
+                description: "You have a strong aptitude for technology, engineering, and systematic problem-solving. You enjoy working with tools, building systems, and creating technical solutions.",
+                careers: ["Software Engineer", "Mechanical Engineer", "IT Specialist", "Cybersecurity Expert", "Robotics Engineer", "Systems Analyst", "DevOps Engineer", "Network Architect", "AI/ML Engineer", "Automation Engineer"],
+                fields: ["Computer Science", "Engineering", "Information Technology", "Robotics", "Cybersecurity", "Applied Physics", "Software Engineering", "Artificial Intelligence", "Computer Engineering", "Systems Engineering"]
+            },
+            social: {
+                type: "People-Focused Helper",
+                icon: "🤝",
+                description: "You are passionate about helping others and making a positive impact on society. You excel in interpersonal relationships and enjoy working directly with people.",
+                careers: ["Social Worker", "Counselor", "Teacher", "Healthcare Professional", "Community Organizer", "Therapist", "Non-profit Program Manager", "School Counselor", "Mental Health Advocate", "Community Development Specialist"],
+                fields: ["Social Work", "Education", "Psychology", "Healthcare", "Sociology", "Human Services", "Counseling Psychology", "Public Health", "Community Development", "Special Education"]
+            },
+            business: {
+                type: "Strategic Entrepreneur",
+                icon: "💼",
+                description: "You have a keen business sense and enjoy creating value through strategic thinking and entrepreneurial ventures. You're motivated by growth, efficiency, and financial success.",
+                careers: ["Business Analyst", "Entrepreneur", "Marketing Manager", "Investment Banker", "Consultant", "Sales Director", "Product Manager", "Business Development Manager", "Strategy Consultant", "Venture Capitalist"],
+                fields: ["Business Administration", "Finance", "Marketing", "Entrepreneurship", "Economics", "International Business", "Strategic Management", "Investment Banking", "Corporate Finance", "Business Analytics"]
+            }
+        };
+
+        // Hybrid career combinations for multiple interests
+        const hybridCareers = {
+            "analytical+creative": {
+                type: "Creative Analyst",
+                icon: "🎨📊",
+                description: "You combine analytical thinking with creative expression, perfect for roles that require both data insights and innovative solutions.",
+                careers: ["UX Researcher", "Creative Data Scientist", "Design Researcher", "Product Analyst", "Marketing Analytics Manager", "Creative Strategist", "Design Thinking Consultant"],
+                fields: ["Design Analytics", "Human-Computer Interaction", "Behavioral Economics", "Creative Technology", "Design Research"]
+            },
+            "analytical+technical": {
+                type: "Technical Analyst",
+                icon: "🔬⚙️",
+                description: "You excel at combining deep analytical skills with technical implementation, ideal for complex problem-solving roles.",
+                careers: ["Machine Learning Engineer", "Quantitative Developer", "Research Software Engineer", "Technical Data Scientist", "Algorithm Developer", "Computational Researcher"],
+                fields: ["Computer Science + Statistics", "Computational Mathematics", "Bioinformatics", "Financial Engineering", "Data Engineering"]
+            },
+            "creative+technical": {
+                type: "Creative Technologist",
+                icon: "🎨⚙️",
+                description: "You merge creativity with technical skills, perfect for building innovative digital experiences and products.",
+                careers: ["Frontend Developer", "Game Developer", "Creative Technologist", "Digital Artist", "Interactive Designer", "AR/VR Developer", "Creative Coder"],
+                fields: ["Digital Media", "Game Development", "Interactive Design", "Creative Computing", "New Media Arts"]
+            },
+            "leadership+business": {
+                type: "Business Leader",
+                icon: "👑💼",
+                description: "You combine natural leadership abilities with business acumen, ideal for executive and entrepreneurial roles.",
+                careers: ["CEO/Founder", "General Manager", "Business Unit Leader", "Strategy Director", "Management Consultant", "Executive Director"],
+                fields: ["Executive MBA", "Strategic Leadership", "Entrepreneurship", "General Management", "Business Strategy"]
+            },
+            "social+leadership": {
+                type: "Social Leader",
+                icon: "🤝👑",
+                description: "You lead through service and social impact, perfect for roles that drive positive change in communities and organizations.",
+                careers: ["Non-profit Executive", "Social Entrepreneur", "Community Leader", "Public Policy Director", "Social Impact Consultant", "Organizational Development Manager"],
+                fields: ["Public Administration", "Social Entrepreneurship", "Non-profit Management", "Community Leadership", "Social Policy"]
+            },
+            "analytical+business": {
+                type: "Business Analyst",
+                icon: "📊💼",
+                description: "You apply analytical rigor to business challenges, ideal for strategic and data-driven business roles.",
+                careers: ["Management Consultant", "Business Intelligence Manager", "Strategic Analyst", "Investment Analyst", "Operations Research Analyst", "Corporate Strategy Manager"],
+                fields: ["Business Analytics", "Management Science", "Financial Analysis", "Operations Research", "Strategic Management"]
+            }
+        };
+
+        function showLogin() {
+            hideAll();
+            document.getElementById('loginScreen').classList.remove('hidden');
+        }
+
+        function showRegister() {
+            hideAll();
+            document.getElementById('registerScreen').classList.remove('hidden');
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // Check if user exists in registered users
+            const user = registeredUsers.find(u => u.email === email && u.password === password);
+            
+            if (user) {
+                currentUser = user;
+                showMessage(`Welcome back, ${user.fullName}!`);
+                hideAll();
+                document.getElementById('roleScreen').classList.remove('hidden');
+            } else {
+                showMessage('Invalid email or password. Please try again or register first.');
+            }
+        }
+
+        function loginAsGuest() {
+            currentUser = {
+                fullName: 'Guest User',
+                email: 'guest@chaturveda.com',
+                isGuest: true
+            };
+            
+            showMessage('Welcome, Guest! Explore ChaturVeda features with limited access.');
+            hideAll();
+            document.getElementById('roleScreen').classList.remove('hidden');
+        }
+
+        function handleRegister(event) {
+            event.preventDefault();
+            
+            const fullName = document.getElementById('regFullName').value;
+            const email = document.getElementById('regEmail').value;
+            const phone = document.getElementById('regPhone').value;
+            const password = document.getElementById('regPassword').value;
+            const confirmPassword = document.getElementById('regConfirmPassword').value;
+            
+            // Check if passwords match
+            if (password !== confirmPassword) {
+                showMessage('Passwords do not match!');
+                return;
+            }
+            
+            // Check if user already exists
+            if (registeredUsers.find(u => u.email === email)) {
+                showMessage('Email already registered. Please login instead.');
+                return;
+            }
+            
+            // Register new user
+            const newUser = {
+                fullName,
+                email,
+                phone,
+                password,
+                registeredAt: new Date().toISOString()
+            };
+            
+            registeredUsers.push(newUser);
+            showMessage(`Registration successful! Welcome ${fullName}! Please login now.`);
+            
+            // Clear form and show login
+            document.getElementById('registerScreen').querySelector('form').reset();
+            showLogin();
+        }
+
+        function selectRole(role) {
+            currentRole = role;
+            hideAll();
+            
+            if (role === 'student') {
+                document.getElementById('studentDashboard').classList.remove('hidden');
+                if (currentUser && currentUser.isGuest) {
+                    document.getElementById('guestIndicator').classList.remove('hidden');
+                }
+            } else if (role === 'professor') {
+                document.getElementById('professorDashboard').classList.remove('hidden');
+                if (currentUser && currentUser.isGuest) {
+                    document.getElementById('guestIndicatorProf').classList.remove('hidden');
+                }
+            } else if (role === 'parent') {
+                document.getElementById('parentDashboard').classList.remove('hidden');
+                if (currentUser && currentUser.isGuest) {
+                    document.getElementById('guestIndicatorParent').classList.remove('hidden');
+                }
+            }
+        }
+
+        function showCareerGuidance() {
+            hideAll();
+            document.getElementById('careerGuidance').classList.remove('hidden');
+            // Show the main career guidance options
+            document.getElementById('mentorConnectInterface').classList.add('hidden');
+            document.getElementById('quizProgressSection').classList.add('hidden');
+            document.getElementById('quizContainer').classList.add('hidden');
+            document.getElementById('quizResults').classList.add('hidden');
+        }
+
+        function startCareerQuiz() {
+            document.getElementById('mentorConnectInterface').classList.add('hidden');
+            document.getElementById('quizProgressSection').classList.remove('hidden');
+            document.getElementById('quizContainer').classList.remove('hidden');
+            resetQuiz();
+        }
+
+        function showMentorConnect() {
+            if (currentUser && currentUser.isGuest) {
+                showMessage('Please register or login to connect with mentors. This feature requires payment.');
+                return;
+            }
+            
+            document.getElementById('quizProgressSection').classList.add('hidden');
+            document.getElementById('quizContainer').classList.add('hidden');
+            document.getElementById('quizResults').classList.add('hidden');
+            document.getElementById('mentorConnectInterface').classList.remove('hidden');
+        }
+
+        function filterMentors(category) {
+            // Update filter button styles
+            document.querySelectorAll('.mentor-filter-btn').forEach(btn => {
+                btn.classList.remove('bg-purple-600', 'text-white');
+                btn.classList.add('bg-gray-200', 'text-gray-700');
+            });
+            
+            event.target.classList.remove('bg-gray-200', 'text-gray-700');
+            event.target.classList.add('bg-purple-600', 'text-white');
+            
+            // Show/hide mentor cards based on category
+            document.querySelectorAll('.mentor-card').forEach(card => {
+                if (category === 'all' || card.classList.contains(category)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function bookMentor(mentorName, mentorTitle) {
+            showMessage(`Payment of ₹500 processed! Connecting you with ${mentorName}...`);
+            
+            setTimeout(() => {
+                currentMentorSession = { name: mentorName, title: mentorTitle };
+                startMentorSession(mentorName, mentorTitle);
+            }, 2000);
+        }
+
+        function startMentorSession(mentorName, mentorTitle) {
+            hideAll();
+            document.getElementById('mentorSessionInterface').classList.remove('hidden');
+            document.getElementById('mentorSessionName').textContent = mentorName;
+            document.getElementById('mentorSessionTitle').textContent = mentorTitle;
+            
+            mentorTimeLeft = 1800; // 30 minutes
+            updateMentorTimer();
+            mentorTimer = setInterval(updateMentorTimer, 1000);
+        }
+
+        function updateMentorTimer() {
+            const minutes = Math.floor(mentorTimeLeft / 60);
+            const seconds = mentorTimeLeft % 60;
+            document.getElementById('mentorTimeRemaining').textContent = 
+                `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            
+            mentorTimeLeft--;
+            
+            if (mentorTimeLeft < 0) {
+                endMentorSession();
+            }
+        }
+
+        function extendSession() {
+            if (currentUser && currentUser.isGuest) {
+                showMessage('Please register or login to extend sessions.');
+                return;
+            }
+            
+            showMessage('Payment of ₹250 processed! Session extended by 15 minutes.');
+            mentorTimeLeft += 900; // Add 15 minutes
+        }
+
+        function endMentorSession() {
+            if (mentorTimer) {
+                clearInterval(mentorTimer);
+            }
+            
+            hideAll();
+            document.getElementById('ratingInterface').classList.remove('hidden');
+        }
+
+        function backToCareerGuidance() {
+            if (mentorTimer) {
+                clearInterval(mentorTimer);
+            }
+            hideAll();
+            document.getElementById('careerGuidance').classList.remove('hidden');
+        }
+
+        function resetQuiz() {
+            currentQuestionIndex = 0;
+            quizAnswers = [];
+            careerScores = {
+                analytical: 0,
+                creative: 0,
+                leadership: 0,
+                technical: 0,
+                social: 0,
+                business: 0
+            };
+            document.getElementById('quizContainer').classList.remove('hidden');
+            document.getElementById('quizResults').classList.add('hidden');
+            displayQuestion();
+        }
+
+        function displayQuestion() {
+            const question = quizQuestions[currentQuestionIndex];
+            const totalQuestions = quizQuestions.length;
+            const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
+            
+            document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
+            document.getElementById('totalQuestions').textContent = totalQuestions;
+            document.getElementById('progressPercent').textContent = Math.round(progress);
+            document.getElementById('progressBar').style.width = progress + '%';
+            
+            document.getElementById('questionIcon').textContent = question.icon;
+            document.getElementById('questionText').textContent = question.question;
+            
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const label = document.createElement('label');
+                label.className = 'quiz-option-label w-full p-4 border-2 border-gray-200 rounded-lg hover:border-purple-500 hover:bg-purple-50 transition-all duration-200 cursor-pointer flex items-center';
+                
+                const input = document.createElement('input');
+                input.type = 'checkbox';
+                input.name = 'quizAnswer';
+                input.value = index;
+                input.className = 'w-5 h-5 text-purple-600 mr-4 rounded';
+                input.addEventListener('change', handleAnswerSelection);
+                
+                const span = document.createElement('span');
+                span.innerHTML = `<span class="font-semibold text-gray-800">${String.fromCharCode(65 + index)})</span> ${option.text}`;
+                
+                label.appendChild(input);
+                label.appendChild(span);
+                optionsContainer.appendChild(label);
+            });
+            
+            // Restore previous answers if they exist
+            if (quizAnswers[currentQuestionIndex] !== undefined && Array.isArray(quizAnswers[currentQuestionIndex])) {
+                const previousAnswers = quizAnswers[currentQuestionIndex];
+                previousAnswers.forEach(answerIndex => {
+                    const checkbox = document.querySelector(`input[name="quizAnswer"][value="${answerIndex}"]`);
+                    if (checkbox) {
+                        checkbox.checked = true;
+                        checkbox.parentElement.classList.add('border-purple-500', 'bg-purple-100');
+                    }
+                });
+                if (previousAnswers.length > 0) {
+                    enableNextButton();
+                }
+            }
+            
+            // Update navigation buttons
+            updateNavigationButtons();
+        }
+
+        function handleAnswerSelection() {
+            const selectedCheckboxes = document.querySelectorAll('input[name="quizAnswer"]:checked');
+            
+            // Update visual styling
+            document.querySelectorAll('.quiz-option-label').forEach(label => {
+                const checkbox = label.querySelector('input[type="checkbox"]');
+                if (checkbox.checked) {
+                    label.classList.add('border-purple-500', 'bg-purple-100');
+                } else {
+                    label.classList.remove('border-purple-500', 'bg-purple-100');
+                }
+            });
+            
+            // Store the answers as an array
+            if (selectedCheckboxes.length > 0) {
+                quizAnswers[currentQuestionIndex] = Array.from(selectedCheckboxes).map(cb => parseInt(cb.value));
+                enableNextButton();
+            } else {
+                quizAnswers[currentQuestionIndex] = [];
+                disableNextButton();
+            }
+        }
+
+        function enableNextButton() {
+            const nextButton = document.getElementById('nextButton');
+            nextButton.disabled = false;
+        }
+
+        function disableNextButton() {
+            const nextButton = document.getElementById('nextButton');
+            nextButton.disabled = true;
+        }
+
+
+
+        function updateNavigationButtons() {
+            const prevButton = document.getElementById('prevButton');
+            const nextButton = document.getElementById('nextButton');
+            
+            // Previous button
+            prevButton.disabled = currentQuestionIndex === 0;
+            
+            // Next button - check if any answers are selected
+            const hasAnswers = quizAnswers[currentQuestionIndex] !== undefined && 
+                              Array.isArray(quizAnswers[currentQuestionIndex]) && 
+                              quizAnswers[currentQuestionIndex].length > 0;
+            nextButton.disabled = !hasAnswers;
+            
+            // Update next button text for last question
+            if (currentQuestionIndex === quizQuestions.length - 1) {
+                nextButton.textContent = 'View Results →';
+            } else {
+                nextButton.textContent = 'Next →';
+            }
+        }
+
+        function nextQuestion() {
+            const selectedCheckboxes = document.querySelectorAll('input[name="quizAnswer"]:checked');
+            if (selectedCheckboxes.length === 0 && (!quizAnswers[currentQuestionIndex] || quizAnswers[currentQuestionIndex].length === 0)) {
+                return; // No answers selected
+            }
+            
+            // If we're at the last question, show results
+            if (currentQuestionIndex === quizQuestions.length - 1) {
+                calculateScores();
+                showResults();
+                return;
+            }
+            
+            currentQuestionIndex++;
+            displayQuestion();
+        }
+
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                displayQuestion();
+            }
+        }
+
+        function skipQuestion() {
+            // Mark as skipped (empty array indicates skipped)
+            quizAnswers[currentQuestionIndex] = [];
+            
+            if (currentQuestionIndex === quizQuestions.length - 1) {
+                calculateScores();
+                showResults();
+            } else {
+                currentQuestionIndex++;
+                displayQuestion();
+            }
+        }
+
+        function calculateScores() {
+            // Reset scores
+            careerScores = {
+                analytical: 0,
+                creative: 0,
+                leadership: 0,
+                technical: 0,
+                social: 0,
+                business: 0
+            };
+            
+            // Calculate scores from all answered questions
+            quizAnswers.forEach((answerIndices, questionIndex) => {
+                if (Array.isArray(answerIndices) && answerIndices.length > 0) {
+                    const question = quizQuestions[questionIndex];
+                    
+                    // For multiple selections, distribute scores proportionally
+                    const selectionCount = answerIndices.length;
+                    const scoreMultiplier = 1 / selectionCount; // Normalize to prevent inflation
+                    
+                    answerIndices.forEach(answerIndex => {
+                        const selectedOption = question.options[answerIndex];
+                        
+                        Object.keys(selectedOption.scores).forEach(category => {
+                            careerScores[category] += selectedOption.scores[category] * scoreMultiplier;
+                        });
+                    });
+                }
+            });
+        }
+
+        function showResults() {
+            document.getElementById('quizContainer').classList.add('hidden');
+            document.getElementById('quizResults').classList.remove('hidden');
+            
+            // Sort scores to find top interests
+            const sortedScores = Object.entries(careerScores)
+                .sort(([,a], [,b]) => b - a)
+                .filter(([,score]) => score > 0);
+            
+            let profile;
+            
+            // Check for hybrid career combinations
+            if (sortedScores.length >= 2) {
+                const topTwo = sortedScores.slice(0, 2);
+                const [first, second] = topTwo.map(([type]) => type);
+                
+                // Check if scores are close enough to suggest hybrid career
+                const scoreDifference = topTwo[0][1] - topTwo[1][1];
+                const averageScore = (topTwo[0][1] + topTwo[1][1]) / 2;
+                const relativeThreshold = 0.3; // 30% difference threshold
+                
+                if (scoreDifference / averageScore <= relativeThreshold) {
+                    // Look for hybrid career combination
+                    const hybridKey1 = `${first}+${second}`;
+                    const hybridKey2 = `${second}+${first}`;
+                    
+                    if (hybridCareers[hybridKey1]) {
+                        profile = hybridCareers[hybridKey1];
+                    } else if (hybridCareers[hybridKey2]) {
+                        profile = hybridCareers[hybridKey2];
+                    } else {
+                        // Create dynamic hybrid profile
+                        profile = createDynamicHybridProfile(first, second);
+                    }
+                } else {
+                    // Use dominant single career type
+                    profile = careerProfiles[first];
+                }
+            } else if (sortedScores.length === 1) {
+                profile = careerProfiles[sortedScores[0][0]];
+            } else {
+                // Fallback to analytical if no clear preference
+                profile = careerProfiles['analytical'];
+            }
+            
+            document.getElementById('resultIcon').textContent = profile.icon;
+            document.getElementById('careerType').textContent = profile.type;
+            document.getElementById('careerDescription').textContent = profile.description;
+            
+            // Display career paths
+            const careerPathsList = document.getElementById('careerPaths');
+            careerPathsList.innerHTML = '';
+            profile.careers.slice(0, 8).forEach(career => { // Limit to 8 for better display
+                const li = document.createElement('li');
+                li.textContent = `• ${career}`;
+                careerPathsList.appendChild(li);
+            });
+            
+            // Display study fields
+            const studyFieldsList = document.getElementById('studyFields');
+            studyFieldsList.innerHTML = '';
+            profile.fields.slice(0, 8).forEach(field => { // Limit to 8 for better display
+                const li = document.createElement('li');
+                li.textContent = `• ${field}`;
+                studyFieldsList.appendChild(li);
+            });
+        }
+
+        function createDynamicHybridProfile(type1, type2) {
+            const profile1 = careerProfiles[type1];
+            const profile2 = careerProfiles[type2];
+            
+            return {
+                type: `${profile1.type.split(' ')[0]} ${profile2.type.split(' ')[0]}`,
+                icon: `${profile1.icon}${profile2.icon}`,
+                description: `You combine ${type1} thinking with ${type2} skills, making you ideal for interdisciplinary roles that bridge both areas.`,
+                careers: [
+                    ...profile1.careers.slice(0, 4),
+                    ...profile2.careers.slice(0, 4)
+                ],
+                fields: [
+                    ...profile1.fields.slice(0, 3),
+                    ...profile2.fields.slice(0, 3),
+                    `${profile1.fields[0]} + ${profile2.fields[0]}`,
+                    "Interdisciplinary Studies"
+                ]
+            };
+        }
+
+        function retakeQuiz() {
+            resetQuiz();
+        }
+
+        function exploreClasses() {
+            showMessage('Redirecting to classes that match your career interests!');
+            setTimeout(() => {
+                showProfessorClasses();
+            }, 1500);
+        }
+
+        function showProfessorClasses() {
+            hideAll();
+            document.getElementById('professorClassesList').classList.remove('hidden');
+        }
+
+        function showDoubtSession() {
+            showMessage('Doubt Session feature - Get your questions answered by experts!');
+        }
+
+        function showCollegeConnect() {
+            hideAll();
+            document.getElementById('collegeConnect').classList.remove('hidden');
+        }
+
+        function backToStudentDashboard() {
+            hideAll();
+            document.getElementById('studentDashboard').classList.remove('hidden');
+        }
+
+        function backToRoleSelection() {
+            hideAll();
+            document.getElementById('roleScreen').classList.remove('hidden');
+        }
+
+        function backToCollegeConnect() {
+            if (callTimer) {
+                clearInterval(callTimer);
+            }
+            hideAll();
+            document.getElementById('collegeConnect').classList.remove('hidden');
+        }
+
+        function enrollClass(className) {
+            if (currentUser && currentUser.isGuest) {
+                showMessage('Please register or login to enroll in classes. Guest users can only browse content.');
+                return;
+            }
+            showMessage(`Payment processed! You are now enrolled in ${className}.`);
+        }
+
+        function searchCollege() {
+            if (currentUser && currentUser.isGuest) {
+                showMessage('Please register or login to connect with college students. This feature requires payment.');
+                return;
+            }
+            
+            const collegeName = document.getElementById('collegeName').value;
+            
+            if (!collegeName) {
+                showMessage('Please enter a college name');
+                return;
+            }
+            
+            showMessage(`Payment of ₹300 processed! Searching students from ${collegeName}...`);
+            document.getElementById('collegeStudentsList').classList.remove('hidden');
+        }
+
+        function startCall(studentName) {
+            hideAll();
+            document.getElementById('callInterface').classList.remove('hidden');
+            document.getElementById('calleeName').textContent = studentName;
+            
+            timeLeft = 6000;
+            updateTimer();
+            callTimer = setInterval(updateTimer, 1000);
+        }
+
+        function updateTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('timeRemaining').textContent = 
+                `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            
+            timeLeft--;
+            
+            if (timeLeft < 0) {
+                endCall();
+            }
+        }
+
+        function endCall() {
+            if (callTimer) {
+                clearInterval(callTimer);
+            }
+            
+            hideAll();
+            document.getElementById('ratingInterface').classList.remove('hidden');
+        }
+
+        function setRating(rating) {
+            selectedRating = rating;
+            document.getElementById('ratingValue').textContent = `${rating} star${rating > 1 ? 's' : ''} selected`;
+        }
+
+        function submitRating() {
+            const feedback = document.getElementById('feedback').value;
+            const reportAbuse = document.getElementById('reportAbuse').checked;
+            
+            if (selectedRating === 0) {
+                showMessage('Please select a rating');
+                return;
+            }
+            
+            if (reportAbuse) {
+                showMessage('Thank you for your report. The user has been flagged for review and may be suspended.');
+            } else {
+                showMessage(`Thank you for your ${selectedRating}-star rating! The student earned ₹50 for this call.`);
+            }
+            
+            hideAll();
+            document.getElementById('studentDashboard').classList.remove('hidden');
+            
+            // Reset rating form
+            selectedRating = 0;
+            document.getElementById('feedback').value = '';
+            document.getElementById('reportAbuse').checked = false;
+            document.getElementById('ratingValue').textContent = 'Select rating';
+        }
+
+        function registerClass() {
+            if (currentUser && currentUser.isGuest) {
+                showMessage('Please register or login to create classes. Guest users can only browse content.');
+                return;
+            }
+            
+            const className = document.getElementById('className').value;
+            const description = document.getElementById('classDescription').value;
+            const classType = document.getElementById('classType').value;
+            
+            if (!className || !description) {
+                showMessage('Please fill in all required fields');
+                return;
+            }
+            
+            // Add new class to history (simulate adding to top of list)
+            const classHistory = document.getElementById('classHistory');
+            const newClassDiv = document.createElement('div');
+            newClassDiv.className = 'border border-gray-200 rounded-lg p-4';
+            newClassDiv.innerHTML = `
+                <div class="flex justify-between items-start mb-2">
+                    <div>
+                        <h4 class="font-bold text-gray-800">${className}</h4>
+                        <p class="text-gray-600 text-sm">${classType === 'live' ? 'Live Class' : 'Recorded Video'} • Created on ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</p>
+                    </div>
+                    <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">Active</span>
+                </div>
+                <p class="text-gray-600 mb-3">${description}</p>
+                <div class="flex justify-between items-center text-sm">
+                    <span class="text-purple-600 font-semibold">👥 0 Students Enrolled</span>
+                    <span class="text-green-600 font-semibold">💰 Earned: ₹0</span>
+                </div>
+            `;
+            
+            // Insert at the beginning of class history
+            classHistory.insertBefore(newClassDiv, classHistory.firstChild);
+            
+            showMessage(`Class "${className}" registered successfully! You'll earn ₹100 per enrollment.`);
+            
+            // Reset form
+            document.getElementById('className').value = '';
+            document.getElementById('classDescription').value = '';
+        }
+
+        // Toggle video upload based on class type
+        document.getElementById('classType').addEventListener('change', function() {
+            const videoUpload = document.getElementById('videoUpload');
+            const timingSlot = document.getElementById('timingSlot');
+            
+            if (this.value === 'recorded') {
+                videoUpload.classList.remove('hidden');
+                timingSlot.classList.add('hidden');
+            } else {
+                videoUpload.classList.add('hidden');
+                timingSlot.classList.remove('hidden');
+            }
+        });
+
+        function logout() {
+            currentUser = null;
+            currentRole = null;
+            hideAll();
+            document.getElementById('loginScreen').classList.remove('hidden');
+            
+            // Clear login form
+            document.getElementById('loginEmail').value = '';
+            document.getElementById('loginPassword').value = '';
+        }
+
+        function hideAll() {
+            const screens = [
+                'loginScreen', 'registerScreen', 'roleScreen', 'studentDashboard', 'professorDashboard', 
+                'parentDashboard', 'professorClassesList', 'collegeConnect', 'careerGuidance',
+                'callInterface', 'ratingInterface', 'mentorSessionInterface'
+            ];
+            
+            screens.forEach(screen => {
+                document.getElementById(screen).classList.add('hidden');
+            });
+        }
+
+        function showMessage(message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'fixed top-4 right-4 bg-purple-600 text-white px-6 py-4 rounded-lg shadow-lg z-50 max-w-md';
+            messageDiv.textContent = message;
+            
+            document.body.appendChild(messageDiv);
+            
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 4000);
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9960d167f5349aa2',t:'MTc2MTcyMTQ1OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
